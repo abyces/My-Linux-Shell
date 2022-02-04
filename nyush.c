@@ -168,7 +168,7 @@ int exec_controller(struct Command *cmd, int num_cmds){
         } else {
             ret = forks(cmd->argv[0], cmd, num_cmds);
         }
-    } else {
+    }  else {
         char func_dir1[50] = "/bin/";
         char func_dir2[50] = "/usr/bin/";
         strcat(func_dir1, cmd->argv[0]);
