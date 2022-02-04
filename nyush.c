@@ -161,14 +161,14 @@ int exec_controller(struct Command *cmd, int num_cmds){
         ret = func_fg(cmd->argv);
     } else if (strcmp(cmd->argv[0], "exit") == 0){
         ret = func_exit();
-    } else if (cmd->argv[0][0] != '\0' && cmd->argv[0][1] != '\0' && cmd->argv[0][0] == '.' && cmd->argv[0][1] == '/'){
+    } else if (cmd->argv[0][0] != '\0' && cmd->argv[0][1] != '\0' && ((cmd->argv[0][0] == '.' && cmd->argv[0][1] == '/') || (cmd->argv[0][0] == '/'))){
         if(access(cmd->argv[0], X_OK) == -1){
             fprintf(stderr, "Error: invalid program\n");
             ret = -1;
         } else {
             ret = forks(cmd->argv[0], cmd, num_cmds);
         }
-    } else {
+    }  else {
         char func_dir1[50] = "/bin/";
         char func_dir2[50] = "/usr/bin/";
         strcat(func_dir1, cmd->argv[0]);
